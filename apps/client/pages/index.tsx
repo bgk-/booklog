@@ -1,6 +1,7 @@
 import { ActionIcon, createStyles, Header, rem, Title } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import dayjs from 'dayjs';
+import { DatePicker } from '@booklog/client/components/server';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -15,6 +16,10 @@ const useStyles = createStyles((theme) => ({
     position: 'fixed',
     right: rem(26),
     bottom: rem(26),
+  },
+  content: {
+    width: '60vw',
+    margin: '3.5rem auto',
   },
 }));
 
@@ -33,7 +38,8 @@ export function Index() {
         <Title color={theme.white}>Book log</Title>
       </Header>
 
-      <div className={'content'}>
+      <div className={classes.content}>
+        <DatePicker />
         <ActionIcon
           color={theme.primaryColor}
           className={classes.action}
