@@ -12,7 +12,6 @@ export const useStyles = createStyles(() => ({
     overflow: 'scroll',
   },
   button: {
-    padding: '0 1em 0',
     fontSize: 10,
     flexGrow: 1,
   },
