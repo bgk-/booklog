@@ -8,7 +8,7 @@
      - shared/types
      - client/components
  - [x] Create mongodb schema/connection
- - [ ] Create nest services/controllers
+ - [x] Create nest services/controllers
  - [ ] Setup mantine
  - [ ] Create main application page
  - [ ] Create components

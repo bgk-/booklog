@@ -3,8 +3,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 @Schema()
-export class BookModel implements Omit<Book, '_id'> {
-  static Name = 'Book';
+export class BookModel implements Omit<Book, '_id'>  {
+  static ModelName = 'Book';
 
   @Prop({ required: true, maxlength: 255 })
   title: string;

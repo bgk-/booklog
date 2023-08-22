@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@booklog/api/books": ["libs/api/books/src/index.ts"],
+      "@booklog/api/mongo": ["libs/api/mongo/src/index.ts"],
       "@booklog/client/components": ["libs/client/components/src/index.ts"],
       "@booklog/client/components/server": [
         "libs/client/components/src/server.ts"
