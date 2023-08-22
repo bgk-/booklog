@@ -1,6 +1,6 @@
 ## Plan of Action
 
- - Setup nx workspace
+ - [x] Setup nx workspace
    - @nx/nest api
    - @nx/next client
    - libs

@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@booklog/api/books": ["libs/api/books/src/index.ts"],
+      "@booklog/client/components": ["libs/client/components/src/index.ts"],
+      "@booklog/client/components/server": [
+        "libs/client/components/src/server.ts"
+      ],
+      "@booklog/shared/types": ["libs/shared/types/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
