@@ -36,7 +36,16 @@
       "env": {
         "jest": true
       },
-      "rules": {}
+      "rules": {
+        "semi": [
+          "error",
+          "always"
+        ],
+        "quotes": [
+          "error",
+          "single"
+        ]
+      }
     }
   ]
 }
