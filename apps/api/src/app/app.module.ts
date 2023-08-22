@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27027/booklog'),
-    BookModule
+    BookModule,
   ],
 })
 export class AppModule {}

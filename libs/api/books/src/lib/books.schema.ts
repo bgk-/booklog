@@ -3,7 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 @Schema()
-export class BookModel implements Omit<Book, '_id'>  {
+export class BookModel implements Omit<Book, '_id'> {
   static ModelName = 'Book';
 
   @Prop({ required: true, maxlength: 255 })
@@ -25,6 +25,6 @@ export class BookModel implements Omit<Book, '_id'>  {
   rating: number;
 }
 
-export type BookDocument = HydratedDocument<BookModel>
+export type BookDocument = HydratedDocument<BookModel>;
 export const BookSchema = SchemaFactory.createForClass(BookModel);
-BookSchema.index({ title: 1, author: 1 }, { unique: true })
+BookSchema.index({ title: 1, author: 1 }, { unique: true });

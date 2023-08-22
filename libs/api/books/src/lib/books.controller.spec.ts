@@ -7,8 +7,8 @@ import { Book } from '@booklog/shared/types';
 describe('BooksController', () => {
   let controller: BooksController;
   const bookList = [
-    mockBook({ title: 'Find by date'}),
-    mockBook({ title: 'Find another'})
+    mockBook({ title: 'Find by date' }),
+    mockBook({ title: 'Find another' }),
   ];
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -20,18 +20,16 @@ describe('BooksController', () => {
             findByDate: jest.fn().mockResolvedValue(bookList),
             create: jest
               .fn()
-              .mockImplementation((book: Book) =>
-                Promise.resolve({ ...book }),
-              ),
+              .mockImplementation((book: Book) => Promise.resolve({ ...book })),
             update: jest
               .fn()
               .mockImplementation((_, book: Book) =>
-                Promise.resolve({ ...book }),
+                Promise.resolve({ ...book })
               ),
             delete: jest.fn().mockResolvedValue(true),
           },
-        }
-      ]
+        },
+      ],
     }).compile();
     controller = module.get<BooksController>(BooksController);
   });
@@ -46,11 +44,15 @@ describe('BooksController', () => {
   });
 
   it('should update a book', () => {
-    const book = mockBook({ title: 'updated'});
-    expect(controller.update('test uuid', book)).resolves.toEqual(mockBook({ title: 'updated' }));
+    const book = mockBook({ title: 'updated' });
+    expect(controller.update('test uuid', book)).resolves.toEqual(
+      mockBook({ title: 'updated' })
+    );
   });
 
   it('should get all books by date', () => {
-    expect(controller.findByDate(new Date(), new Date())).resolves.toEqual(bookList);
+    expect(controller.findByDate(new Date(), new Date())).resolves.toEqual(
+      bookList
+    );
   });
 });

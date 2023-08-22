@@ -8,27 +8,26 @@ import { createMock } from '@golevelup/ts-jest';
 
 // Implemented from examples in https://github.com/jmcdo29/testing-nestjs/
 export const mockBook = ({
-                          _id = 'test uuid',
-                           title = 'Test',
-                           author = 'Tester Testerson',
-                           date = new Date(),
-                           rating = 0,
-                           notes = 'Testing notes',
-                           isComplete = false
-                         } = {}): Book => ({
+  _id = 'test uuid',
+  title = 'Test',
+  author = 'Tester Testerson',
+  date = new Date(),
+  rating = 0,
+  notes = 'Testing notes',
+  isComplete = false,
+} = {}): Book => ({
   _id,
   title,
   author,
   date,
   rating,
   notes,
-  isComplete
+  isComplete,
 });
 
 describe('BooksService', () => {
   let service: BooksService;
   let bookModel: Model<BookModel>;
-
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -48,7 +47,9 @@ describe('BooksService', () => {
     }).compile();
 
     service = module.get<BooksService>(BooksService);
-    bookModel = module.get<Model<BookModel>>(getModelToken(BookModel.ModelName));
+    bookModel = module.get<Model<BookModel>>(
+      getModelToken(BookModel.ModelName)
+    );
   });
 
   afterEach(() => {
@@ -66,7 +67,7 @@ describe('BooksService', () => {
       date: new Date(),
       rating: 0,
       notes: 'Testing notes',
-      isComplete: false
+      isComplete: false,
     });
     expect(book).toBeDefined();
   });
@@ -78,11 +79,11 @@ describe('BooksService', () => {
           ...mockBook(),
           title: 'updated',
         }),
-      }),
+      })
     );
 
     const update = await service.update('test uuid', {
-      title: 'updated'
+      title: 'updated',
     });
     expect(update.title).toEqual('updated');
   });
