@@ -11,8 +11,8 @@
 - [x] Create nest services/controllers
 - [x] Setup mantine
 - [x] Create main application page
-- [ ] Create components
-- [ ] Setup simple zustand store
+- [x] Create components
+- [x] Setup simple zustand store
 - [ ] Connect api using next Api Routes
 - [ ] Error handling
 - [ ] Setup kubernetes yamls

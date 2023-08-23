@@ -1,7 +1,25 @@
-import { ActionIcon, createStyles, Header, rem, Title } from '@mantine/core';
-import { IconPlus } from '@tabler/icons-react';
+import {
+  ActionIcon,
+  createStyles,
+  Group,
+  Header,
+  rem,
+  Title,
+  useMantineColorScheme,
+} from '@mantine/core';
+import {
+  IconBooks,
+  IconMoonStars,
+  IconPlus,
+  IconSun,
+} from '@tabler/icons-react';
 import dayjs from 'dayjs';
-import { BookTable, DatePicker } from '@booklog/client/components/server';
+import {
+  BookModal,
+  BookTable,
+  DatePicker,
+  useBookModalStore,
+} from '@booklog/client/components/server';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -25,17 +43,32 @@ const useStyles = createStyles((theme) => ({
 
 export function Index() {
   const { classes, theme } = useStyles();
-
+  const openModal = useBookModalStore((state) => state.open);
   const url = new URL('/api/books', 'http://localhost:4200');
   url.searchParams.set(
     'date',
     encodeURIComponent(dayjs(new Date()).startOf('month').format('YYYY-MM-DD'))
   );
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === 'dark';
 
   return (
     <>
       <Header height={'3em'} bg={theme.primaryColor} className={classes.header}>
-        <Title color={theme.white}>Book log</Title>
+        <Group spacing={0}>
+          <IconBooks size={'2.5em'} color={theme.white} />
+          <Title color={theme.white}>Book log</Title>
+        </Group>
+        <ActionIcon
+          variant={dark ? 'light' : 'dark'}
+          onClick={() => toggleColorScheme()}
+          title={'Toggle color scheme'}
+          pos={'absolute'}
+          right={10}
+          top={10}
+        >
+          {dark ? <IconSun size={'1.1em'} /> : <IconMoonStars size={'1.1em'} />}
+        </ActionIcon>
       </Header>
 
       <div className={classes.content}>
@@ -58,11 +91,12 @@ export function Index() {
           color={theme.primaryColor}
           className={classes.action}
           variant={'filled'}
-          // onClick={}
+          onClick={() => openModal(null)}
         >
           <IconPlus size={26} />
         </ActionIcon>
       </div>
+      <BookModal />
     </>
   );
 }
