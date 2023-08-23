@@ -4,9 +4,7 @@ import BookTable from './book-table';
 
 describe('BookTable', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(
-      <BookTable isLoading={false} books={null} />
-    );
+    const { baseElement } = render(<BookTable />);
     expect(baseElement).toBeTruthy();
   });
 });

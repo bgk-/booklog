@@ -28,9 +28,7 @@ export class BooksService {
   async unfinished(): Promise<BookDocument[]> {
     return this.bookModel
       .find({
-        where: {
-          dateCompleted: null,
-        },
+        isCompleted: null,
       })
       .exec();
   }
@@ -40,9 +38,7 @@ export class BooksService {
   }
 
   async delete(bookId: string): Promise<boolean> {
-    const result = await this.bookModel
-      .deleteOne({ where: { _id: bookId } })
-      .exec();
+    const result = await this.bookModel.deleteOne({ _id: bookId }).exec();
     return result.deletedCount === 1;
   }
 }

@@ -13,9 +13,9 @@ import {
   IconPlus,
   IconSun,
 } from '@tabler/icons-react';
-import dayjs from 'dayjs';
 import {
   BookModal,
+  BookModalDelete,
   BookTable,
   DatePicker,
   useBookModalStore,
@@ -44,11 +44,6 @@ const useStyles = createStyles((theme) => ({
 export function Index() {
   const { classes, theme } = useStyles();
   const openModal = useBookModalStore((state) => state.open);
-  const url = new URL('/api/books', 'http://localhost:4200');
-  url.searchParams.set(
-    'date',
-    encodeURIComponent(dayjs(new Date()).startOf('month').format('YYYY-MM-DD'))
-  );
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
 
@@ -73,20 +68,7 @@ export function Index() {
 
       <div className={classes.content}>
         <DatePicker />
-        <BookTable
-          isLoading={false}
-          books={[
-            {
-              title: 'Test',
-              author: 'Testerson',
-              rating: 2,
-              notes: 'A truly great read',
-              date: new Date(),
-              _id: 'test id',
-              isComplete: true,
-            },
-          ]}
-        />
+        <BookTable />
         <ActionIcon
           color={theme.primaryColor}
           className={classes.action}
@@ -97,6 +79,7 @@ export function Index() {
         </ActionIcon>
       </div>
       <BookModal />
+      <BookModalDelete />
     </>
   );
 }

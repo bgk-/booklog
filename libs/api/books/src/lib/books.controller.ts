@@ -9,7 +9,7 @@ import {
   UseFilters,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
-import { Book, CreateBookDto } from '@booklog/shared/types';
+import { Book, CreateBookDto, UpdateBookDto } from '@booklog/shared/types';
 import { MongoErrorFilter, MongooseErrorFilter } from '@booklog/api/mongo';
 
 @Controller('books')
@@ -25,9 +25,9 @@ export class BooksController {
   @Post(':id')
   async update(
     @Param('id') id: string,
-    @Body() book: Book
+    @Body() updateBookDto: UpdateBookDto
   ): Promise<Book | null> {
-    return this.bookService.update(id, book);
+    return this.bookService.update(id, updateBookDto);
   }
 
   @Get()

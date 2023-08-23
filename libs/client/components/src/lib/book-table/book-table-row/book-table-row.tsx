@@ -1,12 +1,4 @@
-import {
-  ActionIcon,
-  Center,
-  Collapse,
-  Rating,
-  rem,
-  Text,
-  useMantineColorScheme,
-} from '@mantine/core';
+import { ActionIcon, Center, Collapse, Rating, rem, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconEdit,
@@ -25,7 +17,6 @@ export interface BookTableRowProps {
 
 export function BookTableRow(props: BookTableRowProps) {
   const { classes, theme } = useStyles();
-  const { colorScheme } = useMantineColorScheme();
   const [opened, { toggle }] = useDisclosure(false);
   const openEdit = useBookModalStore((state) => state.open);
   const openDelete = useBookDeleteStore((state) => state.open);
@@ -70,11 +61,17 @@ export function BookTableRow(props: BookTableRowProps) {
           </Center>
         </td>
       </tr>
-      <Collapse in={opened} className={classes.notes}>
-        <Text>
-          <pre className={classes.pre}>{book.notes}</pre>
-        </Text>
-      </Collapse>
+      {opened && (
+        <tr>
+          <td colSpan={5} style={{ padding: 0 }}>
+            <Collapse in={opened} className={classes.notes}>
+              <Text>
+                <pre className={classes.pre}>{book.notes}</pre>
+              </Text>
+            </Collapse>
+          </td>
+        </tr>
+      )}
     </>
   );
 }

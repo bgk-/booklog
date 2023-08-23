@@ -3,7 +3,7 @@ import { createStyles } from '@mantine/core';
 export const useStyles = createStyles((theme) => ({
   notes: {
     fontSize: 'small',
-    margin: '0 1.5em 1em',
+    margin: '0 auto 1em',
     width: '60vw',
   },
   pre: {
@@ -12,6 +12,9 @@ export const useStyles = createStyles((theme) => ({
   details: {
     display: 'inline-flex',
     justifyContent: 'space-around',
+  },
+  padding0: {
+    padding: 0,
   },
   w35: {
     width: '35%',

@@ -13,12 +13,17 @@ import { useStyles } from './styles';
 import { CreateBookDto } from '@booklog/shared/types';
 import { useBookModalStore } from './store';
 import { useDatePickerStore } from '../date-picker';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { API_URL } from '../../constants';
+import { useSWRConfig } from 'swr';
 
 export function BookModal() {
   const { classes, theme } = useStyles();
   const { book, close, isOpened } = useBookModalStore();
-  const { date } = useDatePickerStore();
+  const { date, url } = useDatePickerStore();
+  const { mutate } = useSWRConfig();
+  const [isLoading, setLoading] = useState(false);
+
   const form = useForm<CreateBookDto>({
     initialValues: {
       title: book?.title ?? '',
@@ -46,8 +51,14 @@ export function BookModal() {
       else form.reset();
     });
   });
-  const onSubmit = (values: CreateBookDto) => {
-    console.log(values);
+  const onSubmit = async (values: CreateBookDto) => {
+    setLoading(true);
+    const bookUrl = new URL(API_URL);
+    if (book) bookUrl.pathname += book._id;
+    await fetch(bookUrl, { method: 'POST', body: JSON.stringify(values) });
+    setLoading(false);
+    await mutate(url);
+    close();
   };
 
   return (
@@ -88,7 +99,7 @@ export function BookModal() {
             minRows={6}
             {...form.getInputProps('notes')}
           />
-          <Button type="submit" mt="sm">
+          <Button type="submit" mt="sm" loading={isLoading}>
             Submit
           </Button>
         </form>
