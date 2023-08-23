@@ -14,11 +14,12 @@ export const useStyles = createStyles(() => ({
   button: {
     fontSize: 10,
     flexGrow: 1,
+    transition: 'font-size 0.2s',
   },
   active: {
     fontWeight: 'bolder',
-    fontSize: 16,
     textDecoration: 'underline',
+    fontSize: 16,
   },
   inactive: {
     fontWeight: 'normal',

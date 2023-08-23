@@ -1,4 +1,12 @@
-import { ActionIcon, Center, Collapse, Rating, rem, Text } from '@mantine/core';
+import {
+  ActionIcon,
+  Center,
+  Collapse,
+  Rating,
+  rem,
+  Text,
+  useMantineColorScheme,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconEdit,
@@ -9,6 +17,7 @@ import {
 } from '@tabler/icons-react';
 import { Book } from '@booklog/shared/types';
 import { useStyles } from '../styles';
+import { useBookDeleteStore, useBookModalStore } from '../../book-modal';
 
 export interface BookTableRowProps {
   book: Book;
@@ -16,13 +25,11 @@ export interface BookTableRowProps {
 
 export function BookTableRow(props: BookTableRowProps) {
   const { classes, theme } = useStyles();
+  const { colorScheme } = useMantineColorScheme();
   const [opened, { toggle }] = useDisclosure(false);
+  const openEdit = useBookModalStore((state) => state.open);
+  const openDelete = useBookDeleteStore((state) => state.open);
   const { book } = props;
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const openEdit = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const openDelete = () => {};
 
   return (
     <>
@@ -54,10 +61,10 @@ export function BookTableRow(props: BookTableRowProps) {
         </td>
         <td>
           <Center>
-            <ActionIcon size="s" m={rem(2)} onClick={openEdit}>
+            <ActionIcon size="s" m={rem(2)} onClick={() => openEdit(book)}>
               <IconEdit />
             </ActionIcon>
-            <ActionIcon size="s" m={rem(2)} onClick={openDelete}>
+            <ActionIcon size="s" m={rem(2)} onClick={() => openDelete(book)}>
               <IconTrash />
             </ActionIcon>
           </Center>
