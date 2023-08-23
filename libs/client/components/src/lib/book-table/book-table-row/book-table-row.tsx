@@ -9,7 +9,10 @@ import {
 } from '@tabler/icons-react';
 import { Book } from '@booklog/shared/types';
 import { useStyles } from '../styles';
-import { useBookDeleteStore, useBookModalStore } from '../../book-modal';
+import { modals } from '@mantine/modals';
+import { API_URL } from '../../../constants';
+import { useSWRConfig } from 'swr';
+import { useDatePickerStore } from '../../date-picker';
 
 export interface BookTableRowProps {
   book: Book;
@@ -18,10 +21,35 @@ export interface BookTableRowProps {
 export function BookTableRow(props: BookTableRowProps) {
   const { classes, theme } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
-  const openEdit = useBookModalStore((state) => state.open);
-  const openDelete = useBookDeleteStore((state) => state.open);
-  const { book } = props;
+  const { mutate } = useSWRConfig();
+  const { url } = useDatePickerStore();
 
+  const { book } = props;
+  const openDeleteModal = () =>
+    modals.openConfirmModal({
+      title: `Delete ${book.title}`,
+      centered: true,
+      children: (
+        <Center>
+          <Text>Are you sure?</Text>
+        </Center>
+      ),
+      labels: { confirm: 'Confirm', cancel: 'Cancel' },
+      confirmProps: { color: 'red' },
+      onConfirm: async () => {
+        const bookUrl = new URL(API_URL + (book._id as string));
+        await fetch(bookUrl, { method: 'DELETE' });
+        await mutate(url);
+      },
+    });
+
+  const openEditModal = () => {
+    modals.openContextModal({
+      modal: 'createOrUpdate',
+      title: 'Update Entry',
+      innerProps: { book },
+    });
+  };
   return (
     <>
       <tr key={book._id as string}>
@@ -52,10 +80,10 @@ export function BookTableRow(props: BookTableRowProps) {
         </td>
         <td>
           <Center>
-            <ActionIcon size="s" m={rem(2)} onClick={() => openEdit(book)}>
+            <ActionIcon size="s" m={rem(2)} onClick={openEditModal}>
               <IconEdit />
             </ActionIcon>
-            <ActionIcon size="s" m={rem(2)} onClick={() => openDelete(book)}>
+            <ActionIcon size="s" m={rem(2)} onClick={openDeleteModal}>
               <IconTrash />
             </ActionIcon>
           </Center>

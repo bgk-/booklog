@@ -7,6 +7,8 @@ import {
 } from '@mantine/core';
 import './styles.css';
 import { useState } from 'react';
+import { ModalsProvider } from '@mantine/modals';
+import { BookModal } from '@booklog/client/components/server';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -50,7 +52,9 @@ export default function App(props: AppProps) {
             },
           }}
         >
-          <Component {...pageProps} />
+          <ModalsProvider modals={{ createOrUpdate: BookModal }}>
+            <Component {...pageProps} />
+          </ModalsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </>

@@ -13,13 +13,8 @@ import {
   IconPlus,
   IconSun,
 } from '@tabler/icons-react';
-import {
-  BookModal,
-  BookModalDelete,
-  BookTable,
-  DatePicker,
-  useBookModalStore,
-} from '@booklog/client/components/server';
+import { BookTable, DatePicker } from '@booklog/client/components/server';
+import { modals } from '@mantine/modals';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -43,7 +38,6 @@ const useStyles = createStyles((theme) => ({
 
 export function Index() {
   const { classes, theme } = useStyles();
-  const openModal = useBookModalStore((state) => state.open);
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
 
@@ -73,13 +67,17 @@ export function Index() {
           color={theme.primaryColor}
           className={classes.action}
           variant={'filled'}
-          onClick={() => openModal(null)}
+          onClick={() =>
+            modals.openContextModal({
+              modal: 'createOrUpdate',
+              title: 'New Entry',
+              innerProps: { book: null },
+            })
+          }
         >
           <IconPlus size={26} />
         </ActionIcon>
       </div>
-      <BookModal />
-      <BookModalDelete />
     </>
   );
 }
