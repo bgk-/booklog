@@ -88,3 +88,7 @@ Go to [http://localhost:3000](http://localhost:3000) to view
 - Most generated content is kept as is, so there's a fair amount of leftovers, however it's useful for review.
 - Only one (local) environment is handled. Would want to properly set up various environments (stage, production, etc)
 - Mongo is set up as a deployment in kubernetes, this would normally be a replicaset
+
+### AI Usage Transparency
+
+No AI code completions (github copilot, tabnine, etc) or chat prompts (chatGPT, bard, etc) were used for this project, except for the book notes in the screenshot.
