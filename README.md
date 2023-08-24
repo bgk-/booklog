@@ -80,9 +80,10 @@ Go to [http://localhost:3000](http://localhost:3000) to view
 ## Notes
 
 - Normally you'd want to have an 'author' collection, but I opted to just go without for ease of implementation.
-- Tests are minimal to non-existent.
+- Tests are minimal to non-existent to focus on learning the tech stack and concentrate on speed rather than long term maintainability.
 - kubernetes resources has no ingress, we are instead using a NodePort (not recommend for production).
-- I wanted to try out k3d over minikube, if I were to set up the k3d registries so you don't need to import images manually it'd be much better.
+- I wanted to try out k3d over minikube, if I were to set up the k3d registries so you don't need to import images manually it'd be much better but not needed for a simple project.
 - Validation is done at the form and model level, normally would have a validation pipe in the nest layer.
 - Opted to write the api proxy manually rather than using a http-proxy package, giving more control if desired per route.
-- Most generated content is kept as is, so there's a fair amount of leftovers.
+- Most generated content is kept as is, so there's a fair amount of leftovers, however it's useful for review.
+- Only one (local) environment is handled. Would want to properly set up various environments (stage, production, etc) 
