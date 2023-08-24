@@ -2,6 +2,8 @@
 
 A place to keep track of the books you've read.
 
+![](https://github.com/bgk-/booklog/blob/main/assets/booklog.png)
+
 ## Setup
 
 Prerequisites
