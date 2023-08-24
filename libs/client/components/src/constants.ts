@@ -1,5 +1,3 @@
-const url = 'http://localhost';
-const port = 3000;
+const url = 'http://localhost:3000';
 
-console.log(`NEXT_API_URL: ${url}:${port}`);
-export const API_URL = new URL('/api/books/', `${url}:${port}`);
+export const API_URL = new URL('/api/books/', url);

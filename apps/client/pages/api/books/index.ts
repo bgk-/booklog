@@ -7,7 +7,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.method, baseUrl, req.body, req.url);
   switch (req.method) {
     case 'GET': {
       const data = await fetch(
@@ -26,7 +25,8 @@ export default async function handler(
         },
         body: req.body,
       });
-      return res.status(data.status).json(await data.json());
+      const json = await data.json();
+      return res.status(data.status).json(json);
     }
     default:
       return res.status(400).json({ error: 'Invalid request' });

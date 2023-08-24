@@ -9,6 +9,7 @@ import './styles.css';
 import { useState } from 'react';
 import { ModalsProvider } from '@mantine/modals';
 import { BookModal } from '@booklog/client/components/server';
+import { Notifications } from '@mantine/notifications';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -53,6 +54,7 @@ export default function App(props: AppProps) {
           }}
         >
           <ModalsProvider modals={{ createOrUpdate: BookModal }}>
+            <Notifications position={'bottom-center'} limit={3} />
             <Component {...pageProps} />
           </ModalsProvider>
         </MantineProvider>

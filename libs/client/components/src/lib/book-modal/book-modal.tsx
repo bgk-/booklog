@@ -4,7 +4,6 @@ import {
   Checkbox,
   Group,
   Rating,
-  Text,
   Textarea,
   TextInput,
 } from '@mantine/core';
@@ -16,6 +15,7 @@ import { useState } from 'react';
 import { API_URL } from '../../constants';
 import { useSWRConfig } from 'swr';
 import { ContextModalProps } from '@mantine/modals';
+import { notifications } from '@mantine/notifications';
 
 export function BookModal({
   context,
@@ -26,7 +26,6 @@ export function BookModal({
   const { date, url } = useDatePickerStore();
   const { mutate } = useSWRConfig();
   const [isLoading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<Error[]>([]);
 
   const { book } = innerProps;
   const form = useForm<CreateBookDto>({
@@ -60,13 +59,24 @@ export function BookModal({
     setLoading(true);
     const bookUrl = new URL(API_URL);
     if (book) bookUrl.pathname += book._id;
-    await fetch(bookUrl, {
+    const res = await fetch(bookUrl, {
       method: 'POST',
       body: JSON.stringify(values),
     });
+
     setLoading(false);
-    await mutate(url);
-    context.closeModal(id);
+    if (res.ok) {
+      await mutate(url);
+      context.closeModal(id);
+      return;
+    }
+    const json = await res.json();
+    notifications.show({
+      title: 'Error',
+      message: json.message,
+      color: 'red',
+      autoClose: 5000,
+    });
   };
 
   return (
@@ -106,11 +116,6 @@ export function BookModal({
           Submit
         </Button>
       </form>
-      {errors.length > 0 && (
-        <Text color={'red'} size={'sm'}>
-          {errors.map((e) => e.message)}
-        </Text>
-      )}
     </Box>
   );
 }

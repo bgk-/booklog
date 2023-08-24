@@ -14,6 +14,6 @@
 - [x] Create components
 - [x] Setup simple zustand store
 - [x] Connect api using next Api Routes
-- [ ] Error handling
+- [x] Basic Error handling
 - [x] Setup kubernetes yamls
 - [x] Rewrite documentation

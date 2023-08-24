@@ -25,8 +25,10 @@ npm install
 
 ```
 docker run mongo -p 27027:27017 -t booklog-db
-MONGO_PORT=27017 npm run serve
+MONGO_PORT=27027 npm run serve
 ```
+
+Go to `http://localhost:3000` to view
 
 ## Local Deployment
 
@@ -44,9 +46,11 @@ MONGO_PORT=27017 npm run serve
 6. Apply kubernetes resources
    `kubectl apply -f ./deploy/`
 
-## Caveats
+## Notes
 
 - Normally you'd want to have an 'author' collection, but I opted to just go without for ease of implementation.
 - Tests are minimal.
 - kubernetes resources has no ingress, we are instead using a NodePort (not recommend for production).
 - I wanted to try out k3d over minikube, but I think for long term use you'd want to set up the k3d registries so you don't need to import images manually.
+- Validation is done at the form and model level, normally would have a validation pipe in the nest layer.
+- Opted to write the api proxy manually rather than using a http-proxy package, giving more control is desired per route. 

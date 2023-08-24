@@ -4,6 +4,8 @@ import { Book } from '@booklog/shared/types';
 import { useStyles } from './styles';
 import useSWR from 'swr';
 import { useDatePickerStore } from '../date-picker';
+import { notifications } from '@mantine/notifications';
+import { useEffect } from 'react';
 
 const fetcher = (...args: [never]) => fetch(...args).then((res) => res.json());
 
@@ -15,6 +17,17 @@ export function BookTable() {
   const rows = data?.map((book: Book) => (
     <BookTableRow key={`row_${book._id}`} book={book} />
   ));
+
+  useEffect(() => {
+    if (error) {
+      notifications.show({
+        title: 'Error',
+        message: 'Server is unavailable, retrying.',
+        color: 'red',
+        autoClose: 3000,
+      });
+    }
+  }, [error]);
   return (
     <>
       <Table
