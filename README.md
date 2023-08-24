@@ -86,4 +86,5 @@ Go to [http://localhost:3000](http://localhost:3000) to view
 - Validation is done at the form and model level, normally would have a validation pipe in the nest layer.
 - Opted to write the api proxy manually rather than using a http-proxy package, giving more control if desired per route.
 - Most generated content is kept as is, so there's a fair amount of leftovers, however it's useful for review.
-- Only one (local) environment is handled. Would want to properly set up various environments (stage, production, etc) 
+- Only one (local) environment is handled. Would want to properly set up various environments (stage, production, etc)
+- Mongo is set up as a deployment in kubernetes, this would normally be a replicaset
