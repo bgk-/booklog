@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booklog-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: booklog-client
+  template:
+    metadata:
+      labels:
+        app: booklog-client
+    spec:
+      containers:
+        - name: booklog-client
+          image: booklog-client:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: API_URL
+              value: 'http://booklog-api-service:3001/api'

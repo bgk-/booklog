@@ -2,10 +2,12 @@ import { Module } from '@nestjs/common';
 import { BookModule } from '@booklog/api/books';
 import { MongooseModule } from '@nestjs/mongoose';
 
+const mongoPort = process.env.MONGO_PORT || 27017;
+const mongoHost = process.env.MONGO_HOST || 'localhost';
+const mongoUri = `mongodb://${mongoHost}:${mongoPort}/booklog`;
+console.log(`[mongodb] Connecting to ${mongoUri}`);
+
 @Module({
-  imports: [
-    MongooseModule.forRoot('mongodb://localhost:27027/booklog'),
-    BookModule,
-  ],
+  imports: [MongooseModule.forRoot(mongoUri), BookModule],
 })
 export class AppModule {}

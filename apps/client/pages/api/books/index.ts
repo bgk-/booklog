@@ -7,6 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log(req.method, baseUrl, req.body, req.url);
   switch (req.method) {
     case 'GET': {
       const data = await fetch(

@@ -70,7 +70,7 @@ export function BookModal({
   };
 
   return (
-    <Box maw={420} mx="auto">
+    <Box maw={420} mx="auto" h={'auto'}>
       <form onSubmit={form.onSubmit(onSubmit)}>
         <TextInput
           label="Title"

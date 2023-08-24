@@ -15,5 +15,5 @@
 - [x] Setup simple zustand store
 - [x] Connect api using next Api Routes
 - [ ] Error handling
-- [ ] Setup kubernetes yamls
-- [ ] Rewrite documentation
+- [x] Setup kubernetes yamls
+- [x] Rewrite documentation

@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: booklog-api-service
+spec:
+  selector:
+    app: booklog-api
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+      name: booklog-api-service
